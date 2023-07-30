@@ -7,4 +7,3 @@
 4. Nextcloud installieren.
 5. Das Script "trusted_domain.sh" mit sudo ausführen. Falls man die Nextcloud von außen mit einer Domain-Adresse erreichbar machen möchte, dann muss diese zur sicheren Liste hinzugefügt werden.
 6. Die Domain/Domains eintragen, der vertraut werden sollen (wird in die config.php von Nextcloud gespeichert).
-
