@@ -6,11 +6,9 @@ sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
 
-# 
-apt install apache2 mariadb-server libapache2-mod-php php-gd php-mysql \
+# Alle Benötige
+apt install unzip apache2 mariadb-server libapache2-mod-php php-gd php-mysql \
 php-curl php-mbstring php-intl php-gmp php-bcmath php-xml php-imagick php-zip -y
-
-apt install unzip -y
 
 dpkg -i webmin_2.021_all.deb
 
