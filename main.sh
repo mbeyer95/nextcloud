@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Abfrage
+read -p "Bitte geben Sie ein Datenbank-Namen für Nextcloud ein: " datenbankname
+read -p "Bitte geben Sie ein Datenbank-Benutzer ein: " datenbankuser
+read -p "Bitte geben Sie ein Datenbank-Passwort ein: " datenbankpw
+echo
+
 # Updates installieren
 echo "Updates werden gemacht."
 sudo apt update
@@ -43,6 +49,10 @@ echo "Besitzer vom Nextcloud Verzeichnis ändern."
 cd /var/www
 sudo chown -R www-data:www-data html
 
+# Apache neustarten
+sudo systemctl restart apache2
+
 # Datenbank erstellen
-
-
+MYSQL_CMD="sudo mysql -u root -p"
+SQL_CMD="CREATE DATABASE ${datenbankname}; GRANT ALL PRIVILEGES ON ${datenbankname}.* TO '${datenbankuser}'@'localhost' IDENTIFIED BY '${datenbankpw}'; FLUSH PRIVILEGES;"
+echo $SQL_CMD | $MYSQL_CMD
