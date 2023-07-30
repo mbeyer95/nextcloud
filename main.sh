@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Abfrage
-read -p "Bitte geben Sie ein Datenbank-Namen für Nextcloud ein: " datenbankname
-read -p "Bitte geben Sie ein Datenbank-Benutzer ein: " datenbankuser
-read -p "Bitte geben Sie ein Datenbank-Passwort ein: " datenbankpw
-echo
-
 # Updates installieren
 echo "Updates werden installiert."
 sudo apt update
@@ -63,6 +57,13 @@ echo
 
 # Datenbank erstellen
 echo "Datenbank wird erstellt."
+datenbankname=Nextcloud_DB
+datenbankuser=Nextcloud_User
+datenbankpw=$(openssl rand -base64 16)
 MYSQL_CMD="sudo mysql -u root -p"
 SQL_CMD="CREATE DATABASE \`${datenbankname}\`; GRANT ALL PRIVILEGES ON \`${datenbankname}\`.* TO '${datenbankuser}'@'localhost' IDENTIFIED BY '${datenbankpw}'; FLUSH PRIVILEGES;"
 echo $SQL_CMD | $MYSQL_CMD
+
+echo $datenbankname
+echo $datenbankuser
+echo $datenbankpw
