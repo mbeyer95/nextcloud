@@ -20,5 +20,6 @@ sed -i "s|memory_limit = 128M|memory_limit = 1024M|" /etc/php/8.1/apache2/phi.in
 cd /var/www/html
 rm -rf index.html
 
+# Nextcloud herunterladen
 wget https://cloud.maximilianbeyer.de/index.php/s/6awt6TjPjMWinMA/download/latest.tar.bz2
 
