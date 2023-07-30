@@ -17,7 +17,7 @@ cd ~/nextcloud
 sudo apt install unzip -y
 dpkg -i webmin_2.021_all.deb
 sudo apt install unzip -y
-apt --fix-broken install
+apt --fix-broken install -y
 dpkg -i webmin_2.021_all.deb
 
 # PHP Mehr Arbeitsspeicher zuweisen
@@ -42,4 +42,7 @@ rm -rf latest.tar.bz2
 echo "Besitzer vom Nextcloud Verzeichnis ändern."
 cd /var/www
 sudo chown -R www-data:www-data html
+
+# Datenbank erstellen
+
 
