@@ -64,6 +64,11 @@ MYSQL_CMD="sudo mysql -u root -p"
 SQL_CMD="CREATE DATABASE \`${datenbankname}\`; GRANT ALL PRIVILEGES ON \`${datenbankname}\`.* TO '${datenbankuser}'@'localhost' IDENTIFIED BY '${datenbankpw}'; FLUSH PRIVILEGES;"
 echo $SQL_CMD | $MYSQL_CMD
 
+# Apache neustarten
+echo "Apache wird neugestartet."
+sudo systemctl restart apache2
+echo
+
 echo $datenbankname
 echo $datenbankuser
 echo $datenbankpw
