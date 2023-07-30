@@ -7,7 +7,7 @@ read -p "Bitte geben Sie ein Datenbank-Passwort ein: " datenbankpw
 echo
 
 # Updates installieren
-echo "Updates werden gemacht."
+echo "Updates werden installiert."
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
