@@ -70,6 +70,7 @@ sudo systemctl restart apache2
 echo
 
 echo -e "Webadresse: \e[35mhttp://$(hostname -I | cut -d' ' -f1)\e[0m"
-echo -e "Datenbank-Name: \e[35m$datenbankname\e[0m"
 echo -e "Datenbank-Benutzer: \e[35m$datenbankuser\e[0m"
 echo -e "Datenbank-Passwort: \e[35m$datenbankpw\e[0m"
+echo -e "Datenbank-Name: \e[35m$datenbankname\e[0m"
+echo -e "Datenbank-Port: \e[35mlocalhost:3307\e[0m"
