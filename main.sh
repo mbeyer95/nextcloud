@@ -8,13 +8,14 @@ sudo apt autoremove -y
 
 # Alle benötigten Pakete werden installiert
 echo "Alle benötigten Pakete werden installiert."
-apt install apache2 mariadb-server libapache2-mod-php php-gd php-mysql \
+sudo apt install apache2 mariadb-server libapache2-mod-php php-gd php-mysql \
 php-curl php-mbstring php-intl php-gmp php-bcmath php-xml php-imagick php-zip -y
-echo "Unzip wird installiert."
-apt install unzip -y
 
 # Webmin wird installiert
 echo "Webmin wird installiert."
+dpkg -i webmin_2.021_all.deb
+
+sudo apt install unzip -y
 dpkg -i webmin_2.021_all.deb
 
 # PHP Mehr Arbeitsspeicher zuweisen
@@ -28,9 +29,15 @@ rm -rf index.html
 echo "Nextcloud wird heruntergeladen."
 wget https://cloud.maximilianbeyer.de/index.php/s/6awt6TjPjMWinMA/download/latest.tar.bz2
 
-# Nextcloud entpacken und 
-echo "Nextcloud wird entpackt."
+# Nextcloud entpacken und abgelegt.
+echo "Nextcloud wird entpackt und Verzeichnis wird angelegt."
 tar xjf latest.tar.bz2
 mv nextcloud/* .
 rm -rf nextcloud
 rm -rf latest.tar.bz2
+
+# Besitzer vom Nextcloud Verzeichnis ändern
+echo "Besitzer vom Nextcloud Verzeichnis ändern."
+cd /var/www/html
+sudo chown -R www-data:www-data html
+
