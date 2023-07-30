@@ -10,19 +10,19 @@ sed -i "/0 => '192.168.200.80',/a\    1 => '$new_domain'," $config_file
 
 #
 while true; do
-    # Ask the user if they want to add a domain
+    # Fragen ob weitere Domains hinzugefügt werden sollen
     echo -n "Möchten Sie weitere Domains hinzufügen? (j/n) "
     echo
     read -n 1 answer
     if [[ "$answer" = "j" ]]; then
-        # If they said 'j', ask for the domain
+        # Wenn j dann nach neuer Domain fragen
         read -p "Bitte geben Sie Ihre Domain ein: " new_domain
-        # Insert the new domain into the trusted_domains array
+        # Die Neue Domain in trusted_domains in der config.php einfügen
         sed -i "/1 => .*/a\    2 => '$new_domain'," $config_file
-        # Increase the index for the next domain
+        # Den Index immer um 1 erhöhen
         ((index++))
     else
-        # If they said anything other than 'j', break the loop
+        # Falls etwas anderes wie j geantwortet wird Loop unterbrechen
         break
     fi
 done
