@@ -70,6 +70,19 @@ echo "Apache wird neugestartet."
 sudo systemctl restart apache2
 echo
 
+# Sicherheit verbessern
+echo "Sicherheit verbessern..."
+# PHP Buffering ausschalten in php.ini
+sed -i "s|output_buffering = 4096|output_buffering = Off|" /etc/php/8.1/apache2/php.ini
+# AllowOverride von /var/www/ auf "All" gesetzt in apache2.conf 
+sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+echo
+
+# Apache neustarten
+echo "Apache wird neugestartet."
+sudo systemctl restart apache2
+echo
+
 # Infos anzeigen
 echo -e "MYSQL/MariaDB Root Passwort: \e[35m$mysql_root_pw\e[0m"
 echo -e "Webadresse: \e[35mhttp://$(hostname -I | cut -d' ' -f1)\e[0m"
