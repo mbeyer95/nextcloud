@@ -1,7 +1,5 @@
 #!/bin/bash
 
-read -p "Bitte geben Sie Ihre Domain ein: " new_domain
-
 # Updates installieren
 echo "Updates werden installiert."
 sudo apt update
@@ -72,9 +70,7 @@ echo "Apache wird neugestartet."
 sudo systemctl restart apache2
 echo
 
-# Domain zu trusted_domain hinzufügen
-sed -i "/0 => '192.168.200.80',/a\    1 => '$new_domain'," $config_file
-
+# Infos anzeigen
 echo -e "MYSQL/MariaDB Root Passwort: \e[35m$mysql_root_pw\e[0m"
 echo -e "Webadresse: \e[35mhttp://$(hostname -I | cut -d' ' -f1)\e[0m"
 echo -e "Datenbank-Benutzer: \e[35m$datenbankuser\e[0m"
