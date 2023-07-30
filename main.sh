@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read -p "Bitte geben Sie eine Domain ein: " new_domain
+read -p "Bitte geben Sie Ihre Domain ein: " new_domain
 
 # Updates installieren
 echo "Updates werden installiert."
@@ -25,7 +25,7 @@ apt --fix-broken install -y
 dpkg -i webmin_2.021_all.deb
 echo
 
-# PHP Mehr Arbeitsspeicher zuweisen
+# PHP mehr Arbeitsspeicher zuweisen
 echo "PHP wird mehr Arbeitsspeicher zugewiesen."
 sed -i "s|memory_limit = 128M|memory_limit = 1024M|" /etc/php/8.1/apache2/php.ini
 
@@ -59,10 +59,11 @@ echo
 
 # Datenbank erstellen
 echo "Datenbank wird erstellt."
+mysql_root_pw=$(openssl rand -base64 16)
 datenbankname=Nextcloud_DB
 datenbankuser=Nextcloud_User
 datenbankpw=$(openssl rand -base64 16)
-MYSQL_CMD="sudo mysql -u root -p"
+MYSQL_CMD="sudo mysql -u root -p${mysql_root_pw}"
 SQL_CMD="CREATE DATABASE \`${datenbankname}\`; GRANT ALL PRIVILEGES ON \`${datenbankname}\`.* TO '${datenbankuser}'@'localhost' IDENTIFIED BY '${datenbankpw}'; FLUSH PRIVILEGES;"
 echo $SQL_CMD | $MYSQL_CMD
 
@@ -74,8 +75,9 @@ echo
 # Domain zu trusted_domain hinzufügen
 sed -i "/0 => '192.168.200.80',/a\    1 => '$new_domain'," $config_file
 
+echo -e "MYSQL/MariaDB Root Passwort: \e[35m$mysql_root_pw\e[0m"
 echo -e "Webadresse: \e[35mhttp://$(hostname -I | cut -d' ' -f1)\e[0m"
 echo -e "Datenbank-Benutzer: \e[35m$datenbankuser\e[0m"
 echo -e "Datenbank-Passwort: \e[35m$datenbankpw\e[0m"
 echo -e "Datenbank-Name: \e[35m$datenbankname\e[0m"
-echo -e "Datenbank-Port: \e[35mlocalhost:3307\e[0m"
+echo -e "Datenbank-Host: \e[35mlocalhost:3307\e[0m"
